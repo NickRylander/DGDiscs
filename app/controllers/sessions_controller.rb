@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     end
 
     post '/login' do
-        user = User.find_by(email: params[:email]) #find the user
+        user = User.find_by(username: params[:username]) #find the user
         if user && user.authenticate(params[:password]) #authenticate the user
             session[:user_id] = user.id # log the user in and redirect
             redirect "/discs"
