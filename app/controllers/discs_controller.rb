@@ -1,6 +1,7 @@
 class DiscsController < ApplicationController
 
     get '/discs' do # displays a list of all discs
+        @discs = Disc.all # sets an instance variable to all the disc objects
         erb :index
     end
 
