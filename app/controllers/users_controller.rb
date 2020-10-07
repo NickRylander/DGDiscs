@@ -11,5 +11,6 @@ class UsersController < ApplicationController
             redirect "/discs" 
         else
             erb :"users/signup" # render the erb file as the internet is stateless
+        end
     end
 end
