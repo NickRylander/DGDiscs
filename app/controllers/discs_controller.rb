@@ -2,7 +2,7 @@ class DiscsController < ApplicationController
 
     get '/discs' do # displays a list of all discs
         @discs = Disc.all # sets an instance variable to all the disc objects
-        erb :index
+        erb :"discs/index"
     end
 
     get '/discs/new' do # displays a from to make and save another disc

@@ -1,4 +1,4 @@
 class User < ActiveRecord::Base
-    has_many :discs
     has_secure_password
+    has_many :discs
 end
