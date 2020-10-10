@@ -1,7 +1,7 @@
 class DiscsController < ApplicationController
 
     get '/discs' do # displays a list of all discs
-        # redirect_if_not_logged_in
+        redirect_if_not_logged_in
         @discs = Disc.all # sets an instance variable to all the disc objects
         erb :"discs/index"
     end
@@ -10,6 +10,15 @@ class DiscsController < ApplicationController
         redirect_if_not_logged_in
         @users = User.all
         erb :"discs/new"
+    end
+
+    post '/discs' do # creates an instance of a new disc
+        disc = Disc.new(params) #sets all attributes
+        if disc.save
+            redirect "/discs/#{disc.id}"
+        else
+            redirect "/discs/new"
+        end
     end
 
     get '/discs/:id' do # displays one insance of a disc
@@ -29,20 +38,11 @@ class DiscsController < ApplicationController
         end
     end
 
-    post '/discs' do # creates an instance of a new disc
-        disc = Disc.new(params) #sets all attributes
-        if disc.save
-            redirect "/discs/#{disc.id}"
-        else
-            redirect "/discs/new"
-        end
-    end
-
     patch '/discs/:id' do # updates an instance of a disc
         @disc = Disc.find_by_id(params[:id])
         params.delete("_method")
         if @disc.update(params)
-            erb :"/discs/#{@disc.id}"
+            redirect "/discs/#{@disc.id}"
         else
             redirect "/discs/new"
         end

@@ -6,16 +6,14 @@
     <%= @disc.turn %>
     <%= @disc.fade %>
 
-<a href="/discs">Home</a>
-
-<% if @disc.id == current_user.id %>
-<!-- edit link -->
+<% if @disc.user_id == current_user.id %>
     <a href="/discs/<%= @disc.id %>/edit">Edit this disc</a><br />
-    <%# delete form %>
     <h3>Would you like to remove this disc?</h3>
-    <form method="POST" action="/discs/<%= @post.id %>">
+    <form method="POST" action="/discs/<%= @disc.id %>">
         <input type="hidden" id="hidden" name="_method" value="DELETE">
         <input type="submit" value="delete">
     </form>
 
 <% end %>
+
+<a href="/discs">Home</a>
