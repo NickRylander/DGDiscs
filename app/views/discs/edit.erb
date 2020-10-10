@@ -2,7 +2,67 @@
 
 <form method="POST" action="/discs/<%= @disc.id %>">
     <input type="hidden" id="hidden" name="_method" value="PATCH">
-
+        <select name="user_id">
+            <% @users.each do | user |%>
+                <option value="<%= user.id %>"><%= user.username %></option>
+            <% end %>
+        </select><br />
+    <p>Name: <input type="text" name="name"></p>
+    <p>Brand: <input type="text" name="brand"></p>
+    <p>Color: <input type="text" name="color"></p>
+    <label for="speed">Speed:</label>
+        <select name="speed" id="speed">
+            <option value="none"> Choose a Number
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+        </select>
+    </p>
+    <p>Glide:
+        <select name="glide">
+            <option value="none"> Choose a Number
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+    </p>
+    <p>Turn:
+        <select name="turn">
+            <option value="none"> Choose a Number
+            <option value="-5">-5</option>
+            <option value="-4">-4</option>
+            <option value="-3">-3</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </p>
+    <p>Fade:
+        <select name="fade">
+            <option value="none"> Choose a Number
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </p>
     <input type="submit">
-
 </form>

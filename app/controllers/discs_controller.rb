@@ -7,19 +7,19 @@ class DiscsController < ApplicationController
     end
 
     get '/discs/new' do # displays a from to make and save another disc
-        # redirect_if_not_logged_in
+        redirect_if_not_logged_in
         @users = User.all
         erb :"discs/new"
     end
 
     get '/discs/:id' do # displays one insance of a disc
-        # redirect_if_not_logged_in
+        redirect_if_not_logged_in
         @disc = Disc.find_by_id(params[:id])
         erb :"discs/show"
     end
 
     get '/discs/:id/edit' do # displays a form to edit a disc
-        # redirect_if_not_logged_in
+        redirect_if_not_logged_in
         @users = User.all
         @disc = Disc.find_by_id(params[:id])
         if @disc.user.id == current_user.id
@@ -34,17 +34,17 @@ class DiscsController < ApplicationController
         if disc.save
             redirect "/discs/#{disc.id}"
         else
-            redirect "discs/new"
+            redirect "/discs/new"
         end
     end
 
     patch '/discs/:id' do # updates an instance of a disc
         @disc = Disc.find_by_id(params[:id])
         params.delete("_method")
-        if @post.update(params)
-            redirect "/discs/#{@disc.id}"
+        if @disc.update(params)
+            erb :"/discs/#{@disc.id}"
         else
-            redirect "discs/new"
+            redirect "/discs/new"
         end
     end
 

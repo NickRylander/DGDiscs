@@ -1,11 +1,12 @@
 <h1>Discs</h1>
+<ul>
 
 <% @discs.each do |disc| %>
-    <%= disc.name %>
-    <%= disc.brand %>
-    <%= disc.color %>
-    <%= disc.speed %>
-    <%= disc.glide %>
-    <%= disc.turn %>
-    <%= disc.fade %>
+
+  <li><a href="/discs/<%=disc.id%>">    <%= disc.name %></a></li>
+
 <% end %>
+
+</ul>
+
+<a href="/discs/new">Add a disc to your bag!</a>
