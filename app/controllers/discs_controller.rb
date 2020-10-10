@@ -20,7 +20,13 @@ class DiscsController < ApplicationController
 
     get '/discs/:id/edit' do # displays a form to edit a disc
         # redirect_if_not_logged_in
-        
+        @users = User.all
+        @disc = Disc.find_by_id(params[:id])
+        if @disc.user.id == current_user.id
+            erb :"discs/edit"
+        else
+            redirect "/discs"
+        end
     end
 
     post '/discs' do # creates an instance of a new disc
@@ -34,19 +40,19 @@ class DiscsController < ApplicationController
 
     patch '/discs/:id' do # updates an instance of a disc
         @disc = Disc.find_by_id(params[:id])
+        params.delete("_method")
+        if @post.update(params)
+            redirect "/discs/#{@disc.id}"
+        else
+            redirect "discs/new"
+        end
     end
 
     delete '/discs/:id' do # deletes an isntance of a disc
         @disc = Disc.find_by_id(params[:id])
+        if @disc.user.id == current_user.id
+            @disc.destroy
+        end
+        redirect "/discs"
     end
 end
-
-# t.string "name" 
-# t.string "brand"
-# t.string "color"
-# t.integer "speed" 1-14
-# t.integer "glide" 1-7
-# t.integer "turn" 1 to -5
-# t.integer "fade" 0 to 5
-
-# name: => params[:name], brand: => params[:brand], color: => params[:color], speed: => params[:speed], glide: => params[:glide], turn: => params[:turn], fade: => params[:fade]
