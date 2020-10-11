@@ -3,18 +3,20 @@ class DiscsController < ApplicationController
     get '/discs' do # displays a list of all discs
         redirect_if_not_logged_in
         @discs = Disc.all # sets an instance variable to all the disc objects
+        @user = current_user
         erb :"discs/index"
     end
 
     get '/discs/new' do # displays a from to make and save another disc
         redirect_if_not_logged_in
-        @users = User.all
+        @user = current_user
         erb :"discs/new"
     end
 
     post '/discs' do # creates an instance of a new disc
         disc = Disc.new(params) #sets all attributes
         if disc.save
+            disc.update(user_id: current_user.id)
             redirect "/discs/#{disc.id}"
         else
             redirect "/discs/new"

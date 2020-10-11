@@ -1,19 +1,21 @@
     <h1><%= @disc.name %></h1>
-    <%= @disc.brand %>
-    <%= @disc.color %>
-    <%= @disc.speed %>
-    <%= @disc.glide %>
-    <%= @disc.turn %>
-    <%= @disc.fade %>
-
+    <ul>
+        <li>Brand: <%= @disc.brand %></li>
+        <li>Color: <%= @disc.color %></li>
+        <li>Speed: <%= @disc.speed %></li>
+        <li>Glide: <%= @disc.glide %></li>
+        <li>Turn: <%= @disc.turn %></li>
+        <li>Fade: <%= @disc.fade %></li>
+    </ul>
+    <br>
 <% if @disc.user_id == current_user.id %>
-    <a href="/discs/<%= @disc.id %>/edit">Edit this disc</a><br />
-    <h3>Would you like to remove this disc?</h3>
+    <p><a href="/discs/<%= @disc.id %>/edit">Edit this disc</a></p>
     <form method="POST" action="/discs/<%= @disc.id %>">
         <input type="hidden" id="hidden" name="_method" value="DELETE">
-        <input type="submit" value="delete">
+        <input type="submit" value="Delete this disc">
     </form>
 
 <% end %>
+<br>
 
-<a href="/discs">Home</a>
+<h3><a href="/discs">Home</a></h3>
