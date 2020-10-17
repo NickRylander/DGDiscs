@@ -31,7 +31,7 @@ class DiscsController < ApplicationController
 
     get '/discs/:id/edit' do # displays a form to edit a disc
         redirect_if_not_logged_in
-        @users = User.all
+        # @users = User.all
         @disc = Disc.find_by_id(params[:id])
         if @disc.user.id == current_user.id
             erb :"discs/edit"
